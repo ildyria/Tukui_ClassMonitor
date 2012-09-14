@@ -1,6 +1,12 @@
 ﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="locales\english.lua"/>
+	<Script file="locales\french.lua"/>
+
 	<Script file="config\config.lua"/>
 	<Script file="config\profiles.lua"/>
+
+	<Script file="movers.lua"/>
+
 	<Script file="plugins\aura.lua"/>
 	<Script file="plugins\power.lua"/>
 	<Script file="plugins\combo.lua"/>
@@ -12,5 +18,8 @@
 	<Script file="plugins\burningembers.lua"/>
 	<Script file="plugins\demonicfury.lua"/>
 	<Script file="plugins\dots.lua"/>
+	<Script file="plugins\regen.lua"/>
+	<Script file="plugins\wildmushrooms.lua"/>
+
 	<Script file="core.lua"/>
 </Ui>

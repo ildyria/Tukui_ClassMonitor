@@ -1,9 +1,3 @@
--- TODO:
--- =====
--- add a visibility function (we dont want to see resource bar while in travel/flying form)
--- each plugin frame should be children of core frame
--- plugin should be load-on-demand
-
 local ADDON_NAME, Engine = ...
 local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
 
@@ -127,9 +121,16 @@ for i, section in ipairs(settings) do
 			local color = section.color or T.UnitColor.class[T.myclass]
 			local colors = section.colors or CreateColorArray(color, count)
 			local filled = section.filled or false
+			local bar = section.bar or false
+			local text = section.text or true
+			local duration = section.duration or false
 
 			if spellID and filter and count then
-				frame = Engine:CreateAuraMonitor(name, spellID, filter, count, anchor, width, height, spacing, colors, filled, spec)
+				if bar then
+					frame = Engine:CreateBarAuraMonitor(name, spellID, filter, count, anchor, width, height, color, text, duration, spec)
+				else
+					frame = Engine:CreateAuraMonitor(name, spellID, filter, count, anchor, width, height, spacing, colors, filled, spec)
+				end
 			else
 				WARNING("section:"..name..":"..(spellID and "" or " missing spellID")..(filter and "" or " missing filter")..(count and "" or " missing count"))
 			end
@@ -141,7 +142,7 @@ for i, section in ipairs(settings) do
 
 
 			if spellID then
-				frame = CreateDotMonitor(name, spellID, anchor, width, height, colors, threshold, latency, spec)
+				frame = Engine:CreateDotMonitor(name, spellID, anchor, width, height, colors, threshold, latency, spec)
 			else
 				WARNING("section:"..name..":"..(spellID and "" or " missing spellID"))
 			end
@@ -159,12 +160,11 @@ for i, section in ipairs(settings) do
 				WARNING("section:"..name..":"..(runemap and "" or " missing runemap")..(colors and "" or " missing colors"))
 			end
 		elseif kind == "ECLIPSE" then
-			-- TODO
-			--WARNING("section:"..name..": Eclipse not yet implemented")
 			local colors = section.colors
+			local text = section.text or true
 
 			if colors then
-				frame = Engine:CreateEclipseMonitor(name, anchor, width, height, colors)
+				frame = Engine:CreateEclipseMonitor(name, text, anchor, width, height, colors)
 			else
 				WARNING("section:"..name..": missing colors")
 			end

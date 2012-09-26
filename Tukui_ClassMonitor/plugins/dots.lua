@@ -29,7 +29,7 @@ function Engine:CreateDotMonitor(name, spelltracked, anchor, width, height, colo
 
 	local function OnUpdate(self, elapsed)
 		cmDot.timeSinceLastUpdate = cmDot.timeSinceLastUpdate + elapsed
-		if cmDot.timeSinceLastUpdate > 0.1 then
+		if cmDot.timeSinceLastUpdate > 0.01 then
 			local _, _, _, count, _, duration, expTime, _, _, _, _ = UnitAura("target", aura, nil, "PLAYER|HARMFUL")
 			local remainTime = expTime - GetTime()
 			local color
@@ -38,11 +38,14 @@ function Engine:CreateDotMonitor(name, spelltracked, anchor, width, height, colo
 			else
 				if(threshold == 0) then
 					color = (colors and (colors[1])) or T.UnitColor.class[T.myclass]
-				elseif(threshold >= cmDot.dmg) then
+				elseif(threshold*.75 >= cmDot.dmg) then
 					color = (colors and (colors[1])) or T.UnitColor.class[T.myclass]
+					print("attend encore")
 				elseif(threshold >= cmDot.dmg) then
+					print("hoh")
 					color = (colors and (colors[2])) or T.UnitColor.class[T.myclass]
 				else
+					print("GOOOO")
 					color = (colors and (colors[3])) or T.UnitColor.class[T.myclass]
 				end
 			end

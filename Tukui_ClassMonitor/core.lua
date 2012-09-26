@@ -146,6 +146,18 @@ for i, section in ipairs(settings) do
 			else
 				WARNING("section:"..name..":"..(spellID and "" or " missing spellID"))
 			end
+		elseif kind == "SHIELD" then
+			local spellID = section.spellID
+			local colors = section.colors or (section.color and {section.color})
+			local absorbthreshold = section.absorbthreshold or 0
+			local timethreshold = section.timethreshold or 0
+
+
+			if spellID then
+				frame = Engine:CreateShieldMonitor(name, spellID, anchor, width, height, colors, absorbthreshold, timethreshold, spec)
+			else
+				WARNING("section:"..name..":"..(spellID and "" or " missing spellID"))
+			end
 		elseif kind == "RUNES" then
 			local updatethreshold = section.updatethreshold or 0.1
 			local autohide = section.autohide or false

@@ -20,6 +20,7 @@
 	<Script file="plugins\dots.lua"/>
 	<Script file="plugins\regen.lua"/>
 	<Script file="plugins\wildmushrooms.lua"/>
+	<Script file="plugins\shield.lua"/>
 
 	<Script file="core.lua"/>
 </Ui>

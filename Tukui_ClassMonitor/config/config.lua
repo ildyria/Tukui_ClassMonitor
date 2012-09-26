@@ -88,7 +88,21 @@ C["classmonitor"] = {
 			{127/255, 255/255, 0, 1},						Good color : over threshold -- here green -- [default: class color]
 		},
 	color = {r,g,b,a}												if treshold is set to 0	[default: class color]
-
+	
+	SHIELD
+	anchor = 														see note below
+	width = number													width of health bar [default: 85]
+	height = number													height of health bar [default: 10]
+	spellID = number												spell id of dot to monitor
+	timethreshold = number or 0										indicate latency on buff [default: 0]
+	absorbthreshold = number or 0									threshold to work with colors [default: 0]
+	colors = array of array : 
+		{
+			{105/255, 204/255, 240/255, 1},							Good color : over threshold -- here Light Blue -- [default: class color]
+			{255/255, 165/255, 0, 1},								Bad color : under threshold -- here orange -- [default: class color]
+		},
+	color = {r,g,b,a}												if treshold is set to 0	[default: class color]
+	
 	WILDMUSHROOMS
 	anchor = 														see note below
 	width = number													width of health bar [default: 85]
@@ -354,7 +368,7 @@ C["classmonitor"] = {
 			kind = "MOVER",
 			anchor = { "CENTER", UIParent, "CENTER", 0, -140 },
 			width = 261,
-			height = 15,
+			height = 10,
 			text = L.move_classmonitor
 		},
 		{
@@ -364,7 +378,7 @@ C["classmonitor"] = {
 			autohide = false,
 			anchor = { "TOPLEFT", "CM_MOVER", 0, 0 },
 			width = 261,
-			height = 15,
+			height = 10,
 		},
 		{
 			name = "CM_ARCANE_BLAST",
@@ -374,7 +388,7 @@ C["classmonitor"] = {
 			count = 6,
 			anchor = {"BOTTOMLEFT", "CM_MANA", "TOPLEFT", 0, 3},
 			width = 41,
-			height = 15,
+			height = 10,
 			spacing = 3,
 			filled = false,
 		},
@@ -384,14 +398,28 @@ C["classmonitor"] = {
 			spellID = 12654, -- ignite spellID
 			anchor = {"BOTTOMLEFT", "CM_MANA", "TOPLEFT", 0, 3},
 			width = 261,
-			height = 15,
+			height = 10,
 			colors = { 
 				{255/255, 165/255, 0, 1}, -- bad -- orange
 				{255/255, 255/255, 0, 1}, -- 0,75% -- yellow
 				{127/255, 255/255, 0, 1}, -- > 100% GO -- green
 				},
 			latency = true,
-			threshold = 20000,
+			threshold = 10000,
+		},
+		{
+			name = "CM_SHIELD",
+			kind = "SHIELD",
+			spellID = 11426, -- Ice Barrier spellID
+			anchor = {"TOPLEFT", "CM_MANA", "BOTTOMLEFT", 0, -3},
+			width = 261,
+			height = 10,
+			colors = { 
+				{105/255, 204/255, 240/255, 1}, -- good -- Light Blue
+				{255/255, 165/255, 0, 1}, -- bad -- orange
+				},
+			absorbthreshold = 15000,
+			timethreshold = 10,
 		},
 		{
 			name = "CM_COMBU",
@@ -399,7 +427,7 @@ C["classmonitor"] = {
 			spellID = 83853, -- Combustion spellID
 			anchor = {"TOPLEFT", "CM_MANA", "BOTTOMLEFT", 0, -3},
 			width = 261,
-			height = 15,
+			height = 10,
 			color = {228/255, 225/255, 16/255, 1},
 			latency = false,
 		},

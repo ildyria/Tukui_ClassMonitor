@@ -40,12 +40,12 @@ function Engine:CreateDotMonitor(name, spelltracked, anchor, width, height, colo
 					color = (colors and (colors[1])) or T.UnitColor.class[T.myclass]
 				elseif(threshold*.75 >= cmDot.dmg) then
 					color = (colors and (colors[1])) or T.UnitColor.class[T.myclass]
-					print("attend encore")
+					-- print("attend encore")
 				elseif(threshold >= cmDot.dmg) then
-					print("hoh")
+					-- print("hoh")
 					color = (colors and (colors[2])) or T.UnitColor.class[T.myclass]
 				else
-					print("GOOOO")
+					-- print("GOOOO")
 					color = (colors and (colors[3])) or T.UnitColor.class[T.myclass]
 				end
 			end
